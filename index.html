@@ -4,6 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lansh Christian Herrera — Portfolio</title>
+
+<meta name="description" content="Lansh Christian A. Herrera — Computer Science graduate specializing in IT support, data entry, and mobile app development. See projects, certifications, and get in touch.">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lansh Christian Herrera — Portfolio">
+<meta property="og:description" content="Computer Science graduate · IT Software Development / Data Entry / Administrative Staff. See projects, certifications, and get in touch.">
+<meta property="og:image" content="https://lanshiboi.github.io/portfolio-resume/assets/favicon-256.png">
+<meta property="og:url" content="https://lanshiboi.github.io/portfolio-resume/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lansh Christian Herrera — Portfolio">
+<meta name="twitter:description" content="Computer Science graduate · IT Software Development / Data Entry / Administrative Staff.">
+<meta name="twitter:image" content="https://lanshiboi.github.io/portfolio-resume/assets/favicon-256.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -117,6 +136,13 @@ nav{
   background:none;border:1px solid var(--rule);border-radius:6px;
   width:34px;height:34px;cursor:pointer;font-size:1rem;color:var(--text-primary);
 }
+.icon-link{
+  display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border:1px solid var(--rule);border-radius:6px;
+  color:var(--text-primary);transition:.2s;
+}
+.icon-link:hover{border-color:var(--amber);color:var(--amber);}
+.icon-link svg{width:17px;height:17px;}
 .menu-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-primary);}
 
 /* =========================================================
@@ -233,6 +259,25 @@ section{padding:56px 0;}
 .proj-icon{font-size:1.6rem;margin-bottom:10px;display:inline-block;}
 .cert-thumb{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid var(--rule);margin-bottom:12px;}
 
+/* Project cards get a bit more room + a tech chip row */
+.record-item.project-item{padding:0;overflow:hidden;}
+.record-item.project-item .proj-thumb-wrap{
+  width:100%;aspect-ratio:14/9;overflow:hidden;
+  border-bottom:1px solid var(--rule);
+}
+.record-item.project-item .proj-thumb-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .35s ease;
+}
+.record-item.project-item:hover .proj-thumb-wrap img{transform:scale(1.04);}
+.record-item.project-item .proj-body{padding:22px;}
+.tech-chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px;}
+.tech-chip-row span{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  background:var(--teal-soft);color:var(--teal);
+  padding:3px 9px;border-radius:20px;
+}
+
 /* Education */
 .edu-list{list-style:none;}
 .edu-list li{
@@ -254,7 +299,7 @@ section{padding:56px 0;}
 .contact-shell h2{font-size:2rem;margin:10px 0 14px;line-height:1.15;color:var(--text-primary);}
 .contact-shell .lede{color:var(--text-secondary);max-width:560px;font-size:1rem;margin-bottom:32px;}
 
-.info-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+.info-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;}
 .info-card{
   background:var(--paper);border:1px solid var(--rule);
   border-radius:12px;padding:20px 22px;
@@ -300,6 +345,9 @@ section{padding:56px 0;}
 }
 
 footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;font-size:.72rem;}
+footer a{color:var(--text-secondary);text-decoration:underline;text-underline-offset:2px;}
+footer a:hover{color:var(--amber);}
+.footer-links{margin-bottom:8px;display:flex;gap:16px;justify-content:center;}
 
 /* =========================================================
    MODAL
@@ -366,6 +414,9 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
+      <a class="icon-link" href="https://github.com/lanshiboi" target="_blank" rel="noopener" aria-label="GitHub profile">
+        <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      </a>
       <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
       <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
     </div>
@@ -383,10 +434,28 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
           <p class="role">Computer Science Graduate · IT Software Development / Data Entry / Administrative Staff</p>
           <div class="chip-row">
             <span class="chip">📍 Porac, Botolan, Zambales</span>
+            <a href="https://github.com/lanshiboi" target="_blank" rel="noopener" class="chip" style="display:flex;align-items:center;gap:5px;">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+              github.com/lanshiboi
+            </a>
           </div>
         </div>
       </div>
-      <div class="hero-meta" style="justify-content:flex-end;">
+      <div class="hero-meta">
+        <div class="readout">
+          <div>
+            <div class="num">1</div>
+            <div class="label">Project Shipped</div>
+          </div>
+          <div>
+            <div class="num">600</div>
+            <div class="label">OJT Hours</div>
+          </div>
+          <div>
+            <div class="num">2</div>
+            <div class="label">Certifications</div>
+          </div>
+        </div>
         <div style="display:flex;gap:10px;">
           <a href="assets/LanshHerrera_Resume.pdf" target="_blank" rel="noopener" class="btn ghost">View Resume</a>
           <a href="#contact" class="btn">Contact Me</a>
@@ -414,7 +483,7 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
             <span>Mobile Application Development (Flutter, Dart)</span>
             <span>MS Office Suite</span>
             <span>AI-Assisted Tools</span>
-            <span> Web Development (JavaScript, PHP, MySQL)</span>
+            <span>Web Development (JavaScript, PHP, MySQL)</span>
             <span>Problem Solving</span>
           </div>
           <h4>Soft Skills</h4>
@@ -452,7 +521,7 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
     <h2 class="section-title">Certifications</h2>
     <div class="card-grid">
       <div class="record-item fade-in" onclick="openModal('cert1')">
-        <img class="cert-thumb" src="assets/image2.jpg" alt="Certificate of Completion — OJT thumbnail">
+        <img class="cert-thumb" src="assets/image2.jpg" alt="Certificate of Completion — OJT thumbnail" loading="lazy">
         <span class="rec-no mono">CERT / 01</span>
         <h4>Certificate of Completion — OJT</h4>
         <div class="rec-sub">ZAMECO I, Corplan Department</div>
@@ -460,7 +529,7 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
         <div class="view-link">View certificate →</div>
       </div>
       <div class="record-item fade-in" onclick="openModal('cert2')">
-        <img class="cert-thumb" src="assets/image3.jpg" alt="Exploring JavaScript Essentials certificate thumbnail">
+        <img class="cert-thumb" src="assets/image3.jpg" alt="Exploring JavaScript Essentials certificate thumbnail" loading="lazy">
         <span class="rec-no mono">CERT / 02</span>
         <h4>Exploring JavaScript Essentials</h4>
         <div class="rec-sub">PRMSU–CCIT ASCII</div>
@@ -505,13 +574,22 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
     <div class="eyebrow">04 — Applied Work</div>
     <h2 class="section-title">Projects</h2>
     <div class="card-grid">
-      <div class="record-item fade-in" onclick="openModal('proj2')">
-        <img class="cert-thumb" src="assets/image4.jpg" alt="MangoRipe — Ripeness Detector thumbnail" style="height:260px;object-position:center 38%;">
-        <span class="rec-no mono">PROJ / 01</span>
-        <h4>MangoRipe — Ripeness Detector</h4>
-        <div class="rec-sub">Mobile App · Computer Vision</div>
-        <span class="rec-date">Personal Project</span>
-        <div class="view-link">View project →</div>
+      <div class="record-item project-item fade-in" onclick="openModal('proj2')">
+        <div class="proj-thumb-wrap">
+          <img src="assets/mangoripe-thumb.png" alt="MangoRipe — Ripeness Detector, shown on three phone screens" loading="lazy">
+        </div>
+        <div class="proj-body">
+          <span class="rec-no mono">PROJ / 01</span>
+          <h4>MangoRipe — Ripeness Detector</h4>
+          <div class="rec-sub">Mobile App · Computer Vision</div>
+          <span class="rec-date">Personal Project</span>
+          <div class="tech-chip-row">
+            <span>Flutter</span>
+            <span>Dart</span>
+            <span>On-device ML</span>
+          </div>
+          <div class="view-link">View project →</div>
+        </div>
       </div>
     </div>
   </div>
@@ -528,6 +606,10 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
         <div class="info-card">
           <span class="info-label">EMAIL</span>
           <a class="info-value" href="mailto:lansii0430@gmail.com">lansii0430@gmail.com</a>
+        </div>
+        <div class="info-card">
+          <span class="info-label">PHONE</span>
+          <a class="info-value" href="tel:+639637079906">0963 707 9906</a>
         </div>
         <div class="info-card">
           <span class="info-label">AVAILABILITY</span>
@@ -555,7 +637,14 @@ footer{padding:26px 0;text-align:center;color:var(--text-secondary);font-family:
   </div>
 </section>
 
-<footer>© 2026 Lansh Christian A. Herrera. All rights reserved.</footer>
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/lanshiboi" target="_blank" rel="noopener">GitHub</a>
+    <a href="mailto:lansii0430@gmail.com">Email</a>
+    <a href="assets/LanshHerrera_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+  </div>
+  © 2026 Lansh Christian A. Herrera. All rights reserved.
+</footer>
 
 
 <!-- MODAL -->
@@ -589,16 +678,16 @@ const records = {
     title: "MangoRipe — Ripeness Detector",
     sub: "Mobile App · Computer Vision",
     date: "Personal Project",
-    desc: "A mobile app that uses on-device image detection to classify a mango's ripeness from the camera or an uploaded photo — returning a result (e.g. Ripe), a confidence score, and a short care tip such as when to eat or refrigerate.",
+    desc: "A mobile app that uses on-device image detection to classify a mango's ripeness from the camera or an uploaded photo — returning a result (Unripe, Partially Ripe, Ripe, or Rotten), a live confidence score, and a short care tip such as when to eat or refrigerate.",
     linkLabel: "Add live project URL",
     link: "",
     images: [
-      "assets/image4.jpg",
-      "assets/image5.jpg",
-      "assets/image6.jpg",
-      "assets/image7.jpg",
-      "assets/image8.jpg",
-      "assets/image9.jpg"
+      "assets/mangoripe-01-splash.png",
+      "assets/mangoripe-02-detect.png",
+      "assets/mangoripe-03-ripe.png",
+      "assets/mangoripe-04-partially-ripe.png",
+      "assets/mangoripe-05-unripe.png",
+      "assets/mangoripe-06-rotten.png"
     ]
   }
 };
