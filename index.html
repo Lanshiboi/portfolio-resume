@@ -91,7 +91,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 
-/* FIX: hard guard against any horizontal overflow (e.g. when the modal opens
+/* Hard guard against any horizontal overflow (e.g. when the modal opens
    on mobile). This does not affect vertical scrolling. */
 html, body{
   overflow-x:hidden;
@@ -149,9 +149,14 @@ body{
   background-size: 42px 42px;
   background-position: -1px -1px;
 }
-/* FIX: when the modal is open, this class is added to <body> to lock
-   background scrolling (both vertical and horizontal) and stop the page
-   from shifting/"widening" behind the modal. */
+[data-theme="dark"] body{ background-image:
+    linear-gradient(var(--paper-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity:1;
+}
+/* When the modal is open, this class is added to <body> to lock background
+   scrolling and stop the page from shifting/widening behind the modal. */
 body.modal-open{
   position:fixed;
   top:0;
@@ -160,16 +165,11 @@ body.modal-open{
   width:100%;
   overflow:hidden;
 }
-[data-theme="dark"] body{ background-image:
-    linear-gradient(var(--paper-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
-  background-size: 42px 42px;
-  opacity:1;
-}
 .container{max-width:1080px;margin:0 auto;padding:0 24px;}
 h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif;letter-spacing:-0.01em;}
 a{color:inherit;text-decoration:none;}
 .mono{font-family:'IBM Plex Mono', monospace;}
+img{max-width:100%;height:auto;}
 
 /* =========================================================
    NAV
@@ -426,26 +426,25 @@ footer a:hover{color:var(--amber);}
   position:fixed;inset:0;background:rgba(13,27,42,.6);backdrop-filter:blur(3px);
   display:none;align-items:center;justify-content:center;z-index:100;
   padding:20px;
-  /* FIX: box-sizing + width:100% so the overlay's own padding never pushes
-     content past 100% of the viewport width. */
   width:100%;
   box-sizing:border-box;
   overflow-y:auto;
 }
 .modal-overlay.open{display:flex;}
 .modal-box{
-  background:var(--paper-card);border-radius:14px;
-  max-width:520px;
-  width:100%;
+  background:var(--paper-card);border-radius:14px;max-width:520px;width:100%;
   padding:32px;position:relative;border:1px solid var(--rule);
   max-height:85vh;overflow-y:auto;
   overflow-x:hidden;
   box-sizing:border-box;
 }
 .modal-close{
-  position:absolute;top:16px;right:16px;background:none;border:none;
+  position:absolute;top:12px;right:12px;background:none;border:none;
   font-size:1.3rem;cursor:pointer;color:var(--text-secondary);
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;transition:background .2s;
 }
+.modal-close:hover, .modal-close:focus-visible{background:var(--paper);}
 .modal-box .rec-no{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--amber);}
 .modal-box h3{margin:10px 0 4px;font-size:1.25rem;}
 .modal-box .modal-sub{color:var(--teal);font-size:.9rem;margin-bottom:14px;}
@@ -475,21 +474,83 @@ footer a:hover{color:var(--amber);}
 /* =========================================================
    RESPONSIVE
 ========================================================= */
-@media (max-width:760px){
-  .nav-links{position:fixed;top:60px;right:0;background:var(--paper-card);
-    flex-direction:column;width:220px;padding:16px;border:1px solid var(--rule);
-    border-radius:0 0 0 10px;transform:translateX(100%);transition:.25s;gap:16px;}
-  .nav-links.open{transform:translateX(0);}
-  .menu-toggle{display:block;}
-  .split-grid{grid-template-columns:1fr;}
-  .hero-meta{flex-direction:column;align-items:flex-start;}
+
+/* Tablet / small laptop */
+@media (max-width:900px){
+  .info-row{grid-template-columns:1fr 1fr;}
 }
 
+/* Phones and small tablets */
+@media (max-width:760px){
+  .nav-links{position:fixed;top:60px;right:0;background:var(--paper-card);
+    flex-direction:column;width:min(220px,70vw);padding:16px;border:1px solid var(--rule);
+    border-radius:0 0 0 10px;transform:translateX(100%);transition:.25s;gap:16px;
+    max-height:calc(100vh - 60px);overflow-y:auto;}
+  .nav-links.open{transform:translateX(0);}
+  .menu-toggle{display:flex;align-items:center;justify-content:center;width:40px;height:40px;}
+  .split-grid{grid-template-columns:1fr;}
+  .hero-meta{flex-direction:column;align-items:stretch;}
+  .hero-meta > div[style]{width:100%;}
+  .hero-meta .btn{flex:1;text-align:center;}
+  .info-row{grid-template-columns:1fr;}
+  .container{padding:0 18px;}
+  section{padding:44px 0;}
+  .contact-shell{padding:30px 22px;}
+  .contact-shell h2{font-size:1.6rem;}
+  .icon-link, #theme-toggle{width:38px;height:38px;}
+}
+
+/* Small phones */
 @media (max-width:480px){
-  /* FIX: tighter overlay padding + modal padding on small phones so the
-     modal box always has visible margin instead of touching the edges. */
-  .modal-overlay{padding:12px;}
-  .modal-box{padding:22px;}
+  .container{padding:0 14px;}
+  .nav-inner{padding:12px 16px;}
+  nav.scrolled .nav-inner{padding:8px 16px;}
+  .logo img{height:32px;width:32px;}
+
+  .hero{padding:36px 0 24px;}
+  .record-card{padding:24px 18px;}
+  .record-tag{font-size:.6rem;padding:5px 10px;}
+  .hero-top{gap:16px;}
+  .avatar{width:72px;height:72px;border-radius:8px;font-size:1.3rem;}
+  .hero-id h1{font-size:1.4rem;}
+  .hero-id .role{font-size:.85rem;}
+  .chip{font-size:.66rem;padding:3px 8px;}
+
+  .readout{gap:16px;width:100%;justify-content:space-between;}
+  .readout .num{font-size:1.2rem;}
+  .readout .label{font-size:.6rem;}
+  .btn{padding:11px 16px;font-size:.74rem;}
+
+  .section-title{font-size:1.25rem;}
+  .panel, .record-item{padding:18px;}
+  .card-grid{grid-template-columns:1fr;gap:14px;}
+
+  .edu-list li{flex-direction:column;gap:4px;padding:12px 0;}
+  .edu-date{white-space:normal;}
+
+  .contact-shell{padding:22px 16px;border-radius:12px;}
+  .contact-shell h2{font-size:1.35rem;}
+  .contact-form{padding:20px;}
+  .form-group input, .form-group textarea{padding:12px 14px;font-size:.9rem;}
+
+  .modal-overlay{padding:10px;}
+  .modal-box{padding:20px;border-radius:10px;max-height:90vh;}
+  .modal-box h3{font-size:1.1rem;}
+  .carousel-prev, .carousel-next{width:32px;height:32px;font-size:14px;}
+}
+
+/* Very small phones */
+@media (max-width:360px){
+  .hero-id h1{font-size:1.2rem;}
+  .readout{gap:12px;}
+  .hero-meta{gap:16px;}
+  .skill-chips span, .tech-chip-row span{font-size:.7rem;padding:4px 9px;}
+}
+
+/* Landscape phones (short viewport height) */
+@media (max-height:480px) and (orientation:landscape){
+  .modal-box{max-height:92vh;}
+  .modal-box img{max-height:45vh;}
 }
 </style>
 </head>
@@ -775,8 +836,8 @@ const records = {
     sub: "Mobile App · Computer Vision",
     date: "Personal Project",
     desc: "A mobile app that uses on-device image detection to classify a mango's ripeness from the camera or an uploaded photo — returning a result (Unripe, Partially Ripe, Ripe, or Rotten), a live confidence score, and a short care tip such as when to eat or refrigerate.",
-    linkLabel: "Add live project URL",
-    link: "",
+    linkLabel: "Download APK",
+    link: "https://github.com/Lanshiboi/portfolio-resume/releases/download/v1.0.0/Mangoripe-v1.0.0.apk",
     images: [
       "assets/mangoripe-01-splash.png",
       "assets/mangoripe-02-detect.png",
@@ -788,7 +849,7 @@ const records = {
   }
 };
 
-// FIX: remember the scroll position so we can restore it exactly when the
+// Remember the scroll position so we can restore it exactly when the
 // modal closes (position:fixed on <body> otherwise resets scroll to top).
 let scrollPosBeforeModal = 0;
 
@@ -812,7 +873,7 @@ function openModal(key){
     const slides = r.images.map((img,i) => `<div class="carousel-slide" style="flex:0 0 ${100/total}%;max-width:${100/total}%;box-sizing:border-box;padding:0 2px;">
         <img src="${img}" alt="${r.title} screenshot ${i+1}" style="max-height:60vh;width:auto;max-width:100%;object-fit:contain;border-radius:8px;border:1px solid var(--rule);display:block;margin:0 auto;">
       </div>`).join('');
-    const dots = r.images.map((_,i) => `<span class="carousel-dot" data-i="${i}" style="width:7px;height:7px;border-radius:50%;background:${i===0?'var(--amber)':'var(--rule)'};display:inline-block;cursor:pointer;transition:background .2s;"></span>`).join('');
+    const dots = r.images.map((_,i) => `<span class="carousel-dot" data-i="${i}" style="width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><span style="width:7px;height:7px;border-radius:50%;background:${i===0?'var(--amber)':'var(--rule)'};display:block;transition:background .2s;"></span></span>`).join('');
     preview = `<div class="carousel-wrap" style="position:relative;margin-bottom:14px;overflow:hidden;border-radius:8px;">
       <div class="carousel-track" style="display:flex;width:${total*100}%;">
         ${slides}
@@ -839,9 +900,10 @@ function openModal(key){
     <span class="modal-date mono">${r.date}</span>
     <p>${r.desc}</p>
     ${preview}
+    ${(r.images && r.images.length && r.link) ? `<a class="btn" style="display:block;text-align:center;margin-top:-6px;margin-bottom:4px;" href="${r.link}" target="_blank" rel="noopener">${r.linkLabel || 'Open link'} →</a>` : ``}
   `;
   document.getElementById('modal-overlay').classList.add('open');
-  lockBodyScroll(); // FIX: prevent background page from scrolling/shifting while modal is open
+  lockBodyScroll(); // prevent background page from scrolling/shifting while modal is open
 
   if(r.images && r.images.length){
     const track = document.querySelector('.carousel-track');
@@ -852,7 +914,7 @@ function openModal(key){
       idx = (i + total) % total;
       track.style.transition = 'transform .3s ease';
       track.style.transform = `translateX(-${idx * (100/total)}%)`;
-      dotEls.forEach((d,di) => d.style.background = di === idx ? 'var(--amber)' : 'var(--rule)');
+      dotEls.forEach((d,di) => d.firstElementChild.style.background = di === idx ? 'var(--amber)' : 'var(--rule)');
     }
     document.querySelector('.carousel-prev')?.addEventListener('click', () => goTo(idx - 1));
     document.querySelector('.carousel-next')?.addEventListener('click', () => goTo(idx + 1));
@@ -878,7 +940,7 @@ function openModal(key){
 }
 function closeModal(){
   document.getElementById('modal-overlay').classList.remove('open');
-  unlockBodyScroll(); // FIX: restore normal scrolling + scroll position on close
+  unlockBodyScroll(); // restore normal scrolling + scroll position on close
 }
 document.getElementById('modal-overlay').addEventListener('click', (e)=>{
   if(e.target.id === 'modal-overlay') closeModal();
