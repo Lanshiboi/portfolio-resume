@@ -6,6 +6,8 @@
 <title>Lansh Christian Herrera — Portfolio</title>
 
 <meta name="description" content="Lansh Christian A. Herrera — Computer Science graduate specializing in IT support, data entry, and mobile app development. See projects, certifications, and get in touch.">
+<link rel="canonical" href="https://lanshiboi.github.io/portfolio-resume/">
+<meta name="theme-color" content="#eef1ee" id="theme-color-meta">
 
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website">
@@ -25,6 +27,34 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Structured data for search engines (Google rich results) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Lansh Christian A. Herrera",
+  "url": "https://lanshiboi.github.io/portfolio-resume/",
+  "image": "https://lanshiboi.github.io/portfolio-resume/assets/favicon-256.png",
+  "jobTitle": "IT Software Development / Data Entry / Administrative Staff",
+  "email": "mailto:lansii0430@gmail.com",
+  "telephone": "+639637079906",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Porac, Botolan",
+    "addressRegion": "Zambales",
+    "addressCountry": "PH"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "President Ramon Magsaysay State University"
+  },
+  "sameAs": [
+    "https://github.com/lanshiboi"
+  ]
+}
+</script>
+
 <style>
 /* =========================================================
    TOKENS
@@ -61,20 +91,33 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 
-/* Floating particles */
+/* Skip-to-content link (keyboard/screen-reader accessibility) */
+.skip-link{
+  position:absolute;top:-48px;left:12px;z-index:200;
+  background:var(--ink);color:var(--paper);
+  font-family:'IBM Plex Mono',monospace;font-size:.8rem;
+  padding:10px 16px;border-radius:0 0 8px 8px;
+  transition:top .2s ease;
+}
+.skip-link:focus{top:0;}
+
+/* Floating particles — galaxy/star effect, dark mode only */
 #particles-container{
   position:fixed;top:0;left:0;width:100%;height:100%;
   pointer-events:none;z-index:1;overflow:hidden;
+  display:none;
 }
+[data-theme="dark"] #particles-container{ display:block; }
 .particle{
-  position:absolute;bottom:-20px;width:5px;height:5px;border-radius:50%;
-  background:var(--amber);opacity:.35;
+  position:absolute;bottom:-20px;width:3px;height:3px;border-radius:50%;
+  background:#ffffff;opacity:.6;
+  box-shadow:0 0 4px 1px rgba(255,255,255,.5);
   animation:floatParticle linear infinite;
 }
 @keyframes floatParticle{
   0%{transform:translateY(0) translateX(0);opacity:0;}
-  10%{opacity:.35;}
-  90%{opacity:.35;}
+  10%{opacity:.6;}
+  90%{opacity:.6;}
   100%{transform:translateY(-105vh) translateX(30px);opacity:0;}
 }
 
@@ -117,12 +160,21 @@ nav{
   position:sticky;top:0;z-index:50;
   background:var(--paper-card);
   border-bottom:1px solid var(--rule);
+  transition:box-shadow .25s ease, background .25s ease;
+}
+nav.scrolled{
+  background:color-mix(in srgb, var(--paper-card) 92%, transparent);
+  backdrop-filter:blur(8px);
+  box-shadow:0 4px 16px rgba(13,27,42,0.08);
 }
 .nav-inner{
   max-width:1080px;margin:0 auto;padding:14px 24px;
   display:flex;align-items:center;justify-content:space-between;
+  transition:padding .25s ease;
 }
-.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;}
+nav.scrolled .nav-inner{padding:9px 24px;}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;display:flex;align-items:center;}
+.logo img{height:38px;width:38px;object-fit:cover;border-radius:50%;display:block;}
 .logo span{color:var(--amber);}
 .nav-links{display:flex;gap:26px;list-style:none;}
 .nav-links a{
@@ -403,9 +455,11 @@ footer a:hover{color:var(--amber);}
 </head>
 <body>
 
+<a href="#home" class="skip-link">Skip to main content</a>
+
 <nav>
   <div class="nav-inner">
-    <a href="#home" class="logo">LCH<span>.</span></a>
+    <a href="#home" class="logo"><img src="assets/logo_ko.png" alt="Lansh Christian Herrera logo"></a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#profile">About</a></li>
@@ -418,12 +472,12 @@ footer a:hover{color:var(--amber);}
         <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
       </a>
       <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">☰</button>
     </div>
   </div>
 </nav>
 
-<section class="hero" id="home">
+<section class="hero" id="home" tabindex="-1">
   <div class="container">
     <div class="record-card">
       <div class="record-tag mono">FILE NO. LCH-2026</div>
@@ -479,17 +533,17 @@ footer a:hover{color:var(--amber);}
           <div class="skill-chips">
             <span>Data Entry &amp; Encoding</span>
             <span>Excel (VBA / Macros)</span>
+            <span>MS Office Suite</span>
             <span>Basic Data Analysis (SQL)</span>
             <span>Mobile Application Development (Flutter, Dart)</span>
-            <span>MS Office Suite</span>
-            <span>AI-Assisted Tools</span>
             <span>Web Development (JavaScript, PHP, MySQL)</span>
-            <span>Problem Solving</span>
+            <span>AI-Assisted Tools</span>
           </div>
           <h4>Soft Skills</h4>
           <div class="skill-chips">
             <span>Teamwork &amp; Collaboration</span>
             <span>Critical Thinking</span>
+            <span>Problem Solving</span>
             <span>Adaptability</span>
             <span>Attention to Detail</span>
           </div>
@@ -618,6 +672,8 @@ footer a:hover{color:var(--amber);}
       </div>
 
       <form class="contact-form" id="contact-form">
+        <!-- Honeypot: hidden from real visitors, bots tend to fill every field -->
+        <input type="text" name="_gotcha" id="cf-hp" style="position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
         <div class="form-group">
           <label for="cf-name">Name</label>
           <input type="text" id="cf-name" name="name" placeholder="Your name" required>
@@ -773,11 +829,11 @@ document.addEventListener('keydown', (e)=>{
   if(e.key === 'Escape') closeModal();
 });
 
-// floating particles background
+// floating particles background (visible in dark mode only, via CSS)
 const particlesContainer = document.createElement('div');
 particlesContainer.id = 'particles-container';
 document.body.appendChild(particlesContainer);
-for(let i=0;i<28;i++){
+for(let i=0;i<40;i++){
   const p = document.createElement('div');
   p.className = 'particle';
   p.style.left = Math.random()*100 + '%';
@@ -798,20 +854,34 @@ const revealObserver = new IntersectionObserver((entries)=>{
 document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
 
 const themeToggle = document.getElementById('theme-toggle');
+const themeColorMeta = document.getElementById('theme-color-meta');
 let theme = 'light';
 themeToggle.addEventListener('click', ()=>{
   theme = theme === 'dark' ? 'light' : 'dark';
   document.body.setAttribute('data-theme', theme);
   themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  themeColorMeta.setAttribute('content', theme === 'dark' ? '#0b1620' : '#eef1ee');
 });
 
 // mobile menu
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.getElementById('nav-links');
-menuToggle.addEventListener('click', ()=> navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a=>{
-  a.addEventListener('click', ()=> navLinks.classList.remove('open'));
+menuToggle.addEventListener('click', ()=>{
+  const isOpen = navLinks.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 });
+navLinks.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// nav bar shrink + blur on scroll
+const mainNav = document.querySelector('nav');
+window.addEventListener('scroll', ()=>{
+  mainNav.classList.toggle('scrolled', window.scrollY > 12);
+}, { passive: true });
 
 // ===================== CONTACT FORM =====================
 // To receive real email notifications in Gmail, sign up free at https://formspree.io,
@@ -824,6 +894,16 @@ const cfSubmit = document.getElementById('cf-submit');
 
 contactForm.addEventListener('submit', async (e)=>{
   e.preventDefault();
+
+  // Honeypot check — if this hidden field got filled, it's almost certainly a bot.
+  // Pretend it worked so the bot doesn't retry, but never actually send it.
+  if(document.getElementById('cf-hp').value.trim() !== ''){
+    cfStatus.textContent = 'Message sent — thank you! I\'ll reply soon.';
+    cfStatus.classList.add('ok');
+    contactForm.reset();
+    return;
+  }
+
   const name = document.getElementById('cf-name').value.trim();
   const email = document.getElementById('cf-email').value.trim();
   const message = document.getElementById('cf-message').value.trim();
