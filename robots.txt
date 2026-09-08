@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lanshiboi.github.io/portfolio-resume/sitemap.xml

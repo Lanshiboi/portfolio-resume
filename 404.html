@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Lansh Christian Herrera</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d1b2a;
+  --paper:#eef1ee;
+  --paper-card:#ffffff;
+  --paper-line:#d7ddd6;
+  --text-secondary:#4a5a63;
+  --amber:#e08e00;
+  --rule:#c7cec6;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ink:#eef1ee;
+    --paper:#0b1620;
+    --paper-card:#101f2c;
+    --paper-line:#1c2e3b;
+    --text-secondary:#93a4ac;
+    --amber:#ffb703;
+    --rule:#22333f;
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Sans',sans-serif;background:var(--paper);color:var(--ink);
+  background-image:
+    linear-gradient(var(--paper-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+  background-size:42px 42px;padding:24px;
+}
+.card{
+  background:var(--paper-card);border:1px solid var(--rule);border-radius:14px;
+  padding:48px 40px;max-width:420px;text-align:center;
+}
+.file-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.08em;
+  color:var(--amber);text-transform:uppercase;margin-bottom:14px;
+}
+h1{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;margin-bottom:10px;}
+p{color:var(--text-secondary);font-size:.95rem;margin-bottom:28px;line-height:1.6;}
+a.btn{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.8rem;
+  padding:12px 24px;border-radius:8px;background:var(--ink);color:var(--paper);
+  text-decoration:none;
+}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="file-tag">FILE NOT FOUND / 404</div>
+    <h1>404</h1>
+    <p>Sorry, that record doesn't exist. The page you're looking for may have been moved or removed.</p>
+    <a class="btn" href="/portfolio-resume/">← Back to Portfolio</a>
+  </div>
+</body>
+</html>
