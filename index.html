@@ -91,6 +91,13 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 
+/* FIX: hard guard against any horizontal overflow (e.g. when the modal opens
+   on mobile). This does not affect vertical scrolling. */
+html, body{
+  overflow-x:hidden;
+  max-width:100%;
+}
+
 /* Skip-to-content link (keyboard/screen-reader accessibility) */
 .skip-link{
   position:absolute;top:-48px;left:12px;z-index:200;
@@ -141,6 +148,17 @@ body{
     linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
   background-size: 42px 42px;
   background-position: -1px -1px;
+}
+/* FIX: when the modal is open, this class is added to <body> to lock
+   background scrolling (both vertical and horizontal) and stop the page
+   from shifting/"widening" behind the modal. */
+body.modal-open{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  overflow:hidden;
 }
 [data-theme="dark"] body{ background-image:
     linear-gradient(var(--paper-line) 1px, transparent 1px),
@@ -406,13 +424,23 @@ footer a:hover{color:var(--amber);}
 ========================================================= */
 .modal-overlay{
   position:fixed;inset:0;background:rgba(13,27,42,.6);backdrop-filter:blur(3px);
-  display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
+  display:none;align-items:center;justify-content:center;z-index:100;
+  padding:20px;
+  /* FIX: box-sizing + width:100% so the overlay's own padding never pushes
+     content past 100% of the viewport width. */
+  width:100%;
+  box-sizing:border-box;
+  overflow-y:auto;
 }
 .modal-overlay.open{display:flex;}
 .modal-box{
-  background:var(--paper-card);border-radius:14px;max-width:520px;width:100%;
+  background:var(--paper-card);border-radius:14px;
+  max-width:520px;
+  width:100%;
   padding:32px;position:relative;border:1px solid var(--rule);
   max-height:85vh;overflow-y:auto;
+  overflow-x:hidden;
+  box-sizing:border-box;
 }
 .modal-close{
   position:absolute;top:16px;right:16px;background:none;border:none;
@@ -438,6 +466,11 @@ footer a:hover{color:var(--amber);}
   display:block;
   margin:0 auto;
 }
+/* Carousel: keep the wrap and its track from ever exceeding the modal's
+   own width, even with rounding. */
+.carousel-wrap{max-width:100%;}
+.carousel-track{max-width:none;}
+.carousel-slide{min-width:0;}
 
 /* =========================================================
    RESPONSIVE
@@ -450,6 +483,13 @@ footer a:hover{color:var(--amber);}
   .menu-toggle{display:block;}
   .split-grid{grid-template-columns:1fr;}
   .hero-meta{flex-direction:column;align-items:flex-start;}
+}
+
+@media (max-width:480px){
+  /* FIX: tighter overlay padding + modal padding on small phones so the
+     modal box always has visible margin instead of touching the edges. */
+  .modal-overlay{padding:12px;}
+  .modal-box{padding:22px;}
 }
 </style>
 </head>
@@ -748,6 +788,22 @@ const records = {
   }
 };
 
+// FIX: remember the scroll position so we can restore it exactly when the
+// modal closes (position:fixed on <body> otherwise resets scroll to top).
+let scrollPosBeforeModal = 0;
+
+function lockBodyScroll(){
+  scrollPosBeforeModal = window.scrollY || window.pageYOffset || 0;
+  document.body.style.top = `-${scrollPosBeforeModal}px`;
+  document.body.classList.add('modal-open');
+}
+
+function unlockBodyScroll(){
+  document.body.classList.remove('modal-open');
+  document.body.style.top = '';
+  window.scrollTo(0, scrollPosBeforeModal);
+}
+
 function openModal(key){
   const r = records[key];
   let preview;
@@ -785,6 +841,7 @@ function openModal(key){
     ${preview}
   `;
   document.getElementById('modal-overlay').classList.add('open');
+  lockBodyScroll(); // FIX: prevent background page from scrolling/shifting while modal is open
 
   if(r.images && r.images.length){
     const track = document.querySelector('.carousel-track');
@@ -821,6 +878,7 @@ function openModal(key){
 }
 function closeModal(){
   document.getElementById('modal-overlay').classList.remove('open');
+  unlockBodyScroll(); // FIX: restore normal scrolling + scroll position on close
 }
 document.getElementById('modal-overlay').addEventListener('click', (e)=>{
   if(e.target.id === 'modal-overlay') closeModal();
